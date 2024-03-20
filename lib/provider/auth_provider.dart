@@ -11,7 +11,7 @@ class AuthProvider with ChangeNotifier {
   final ApiServices apiService;
 
   late LoginResult _loginResult;
-  late ResultState _state;
+  ResultState _state = ResultState.noData;
   String _message = '';
   bool _isLoggedIn = false;
 

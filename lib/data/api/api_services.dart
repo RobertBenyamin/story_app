@@ -22,4 +22,17 @@ class ApiServices {
       return Response.fromJson(jsonDecode(response.body));
     }
   }
+
+  Future<dynamic> register(
+      http.Client client, String name, String email, String password) async {
+    final response = await client.post(
+      Uri.parse('${baseUrl}register'),
+      body: {
+        'name': name,
+        'email': email,
+        'password': password,
+      },
+    );
+    return Response.fromJson(jsonDecode(response.body));
+  }
 }

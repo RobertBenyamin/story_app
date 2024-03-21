@@ -4,6 +4,7 @@ import 'package:story_app/data/api/api_services.dart';
 import 'package:story_app/provider/auth_provider.dart';
 
 import 'data/db/auth_repository.dart';
+import 'provider/list_provider.dart';
 import 'routes/app_router.dart';
 
 void main() async {
@@ -17,9 +18,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => AuthProvider(
-            authRepository: AuthRepository(), apiService: ApiServices()),
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => AuthProvider(
+              authRepository: AuthRepository(),
+              apiService: ApiServices(),
+            ),
+          ),
+          ChangeNotifierProvider(
+              create: (context) =>
+                  StoryListProvider(apiService: ApiServices())),
+        ],
         child: MaterialApp.router(
           title: 'Story App',
           debugShowCheckedModeBanner: false,

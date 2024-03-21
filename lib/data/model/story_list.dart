@@ -5,49 +5,50 @@ StoryList storyListFromJson(String str) => StoryList.fromJson(json.decode(str));
 String storyListToJson(StoryList data) => json.encode(data.toJson());
 
 class StoryList {
-    bool error;
-    String message;
-    List<ListStory> listStory;
+  bool error;
+  String message;
+  List<ListStory> listStory;
 
-    StoryList({
-        required this.error,
-        required this.message,
-        required this.listStory,
-    });
+  StoryList({
+    required this.error,
+    required this.message,
+    required this.listStory,
+  });
 
-    factory StoryList.fromJson(Map<String, dynamic> json) => StoryList(
+  factory StoryList.fromJson(Map<String, dynamic> json) => StoryList(
         error: json["error"],
         message: json["message"],
-        listStory: List<ListStory>.from(json["listStory"].map((x) => ListStory.fromJson(x))),
-    );
+        listStory: List<ListStory>.from(
+            json["listStory"].map((x) => ListStory.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "error": error,
         "message": message,
         "listStory": List<dynamic>.from(listStory.map((x) => x.toJson())),
-    };
+      };
 }
 
 class ListStory {
-    String id;
-    String name;
-    String description;
-    String photoUrl;
-    DateTime createdAt;
-    double lat;
-    double lon;
+  String id;
+  String name;
+  String description;
+  String photoUrl;
+  DateTime createdAt;
+  double? lat;
+  double? lon;
 
-    ListStory({
-        required this.id,
-        required this.name,
-        required this.description,
-        required this.photoUrl,
-        required this.createdAt,
-        required this.lat,
-        required this.lon,
-    });
+  ListStory({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.photoUrl,
+    required this.createdAt,
+    this.lat,
+    this.lon,
+  });
 
-    factory ListStory.fromJson(Map<String, dynamic> json) => ListStory(
+  factory ListStory.fromJson(Map<String, dynamic> json) => ListStory(
         id: json["id"],
         name: json["name"],
         description: json["description"],
@@ -55,9 +56,9 @@ class ListStory {
         createdAt: DateTime.parse(json["createdAt"]),
         lat: json["lat"]?.toDouble(),
         lon: json["lon"]?.toDouble(),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "description": description,
@@ -65,5 +66,5 @@ class ListStory {
         "createdAt": createdAt.toIso8601String(),
         "lat": lat,
         "lon": lon,
-    };
+      };
 }

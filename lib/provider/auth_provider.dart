@@ -10,7 +10,7 @@ class AuthProvider with ChangeNotifier {
   final AuthRepository authRepository;
   final ApiServices apiService;
 
-  late LoginResult _loginResult;
+  LoginResult _loginResult = LoginResult(token: '', name: '', userId: '');
   ResultState _state = ResultState.noData;
   String _message = '';
   bool _isLoggedIn = false;

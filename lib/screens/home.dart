@@ -82,14 +82,26 @@ class ListStoryWidget extends StatelessWidget {
                 return Card(
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         height: 160,
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            image: DecorationImage(
-                                image: NetworkImage(story.photoUrl),
-                                fit: BoxFit.cover)),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Hero(
+                            tag: story.id,
+                            child: Image.network(
+                              story.photoUrl,
+                              fit: BoxFit.cover,
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),

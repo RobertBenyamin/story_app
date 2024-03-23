@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 
 import '../model/user.dart';
 import '../model/response.dart';
@@ -52,7 +53,8 @@ class ApiServices {
     }
   }
 
-  Future<dynamic> getStoryDetail(http.Client client, String token, String id) async {
+  Future<dynamic> getStoryDetail(
+      http.Client client, String token, String id) async {
     final response = await client.get(
       Uri.parse('${baseUrl}stories/$id'),
       headers: {
@@ -63,6 +65,45 @@ class ApiServices {
       return StoryDetail.fromJson(jsonDecode(response.body));
     } else {
       return Response.fromJson(jsonDecode(response.body));
+    }
+  }
+
+  Future<Response> addStory(
+    String token,
+    String description,
+    List<int> bytes,
+    String fileName,
+  ) async {
+    final uri = Uri.parse('${baseUrl}stories');
+    var request = http.MultipartRequest('POST', uri);
+
+    final multiPartFile = http.MultipartFile.fromBytes(
+      "photo",
+      bytes,
+      filename: fileName,
+    );
+    final Map<String, String> fields = {
+      "description": description,
+    };
+    final Map<String, String> headers = {
+      "Content-type": "multipart/form-data",
+      "Authorization": "Bearer $token",
+    };
+
+    request.files.add(multiPartFile);
+    request.fields.addAll(fields);
+    request.headers.addAll(headers);
+
+    final http.StreamedResponse streamedResponse = await request.send();
+    final int statusCode = streamedResponse.statusCode;
+
+    final Uint8List responseList = await streamedResponse.stream.toBytes();
+    final String responseData = String.fromCharCodes(responseList);
+
+    if (statusCode == 201) {
+      return Response.fromJson(jsonDecode(responseData));
+    } else {
+      throw Exception("Upload file error");
     }
   }
 }

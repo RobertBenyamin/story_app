@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     context
         .read<StoryListProvider>()
-        .fetchStoryList(context.read<AuthProvider>().loginResult.token);
+        .fetchStoryList(context.read<AuthProvider>().token);
   }
 
   @override
@@ -69,7 +69,7 @@ class ListStoryWidget extends StatelessWidget {
           children: [
             const SizedBox(height: 16),
             Text(
-              'Welcome, ${context.read<AuthProvider>().loginResult.name}',
+              'Welcome, ${context.read<AuthProvider>().userName}',
               style: const TextStyle(fontSize: 24),
             ),
             const SizedBox(height: 16),

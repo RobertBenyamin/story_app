@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:story_app/screens/add_story.dart';
 import 'package:story_app/provider/auth_provider.dart';
 
 import '../screens/auth.dart';
@@ -21,6 +22,13 @@ class AppRouter {
           return const HomePage();
         },
         routes: [
+          GoRoute(
+            path: 'stories/create',
+            name: 'add_story',
+            builder: (context, state) {
+              return const AddStoryPage();
+            },
+          ),
           GoRoute(
             path: 'stories/:id',
             name: 'detail',

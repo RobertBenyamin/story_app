@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:story_app/data/api/api_services.dart';
 
+import 'provider/upload_provider.dart';
 import 'routes/app_router.dart';
 import 'provider/list_provider.dart';
 import 'data/db/auth_repository.dart';
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
               create: (context) =>
                   StoryDetailProvider(apiService: ApiServices())),
+          ChangeNotifierProvider(
+              create: (context) =>
+                  UploadProvider(apiService: ApiServices())),
         ],
         child: MaterialApp.router(
           title: 'Story App',

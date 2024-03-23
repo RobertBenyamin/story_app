@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:story_app/provider/auth_provider.dart';
 import 'package:story_app/provider/list_provider.dart';
 
 import '../data/model/story.dart';
 import '../utils/result_state.dart';
+import '../widgets/card_story.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -79,43 +81,7 @@ class ListStoryWidget extends StatelessWidget {
               itemCount: storyList.length,
               itemBuilder: (context, index) {
                 final story = storyList[index];
-                return Card(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 160,
-                        width: MediaQuery.of(context).size.width,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Hero(
-                            tag: story.id,
-                            child: Image.network(
-                              story.photoUrl,
-                              fit: BoxFit.cover,
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Text(
-                            'Posted by ${story.name}',
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+                return CardStory(story: story);
               },
             ),
           ],

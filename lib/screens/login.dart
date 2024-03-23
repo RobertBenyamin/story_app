@@ -90,7 +90,8 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: widget.showRegisterPage,
                   child: const Text(
                     "Register Now",
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(
+                        color: Colors.blue, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

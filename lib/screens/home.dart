@@ -26,46 +26,50 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Story',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              context.read<AuthProvider>().logout();
-            },
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Story',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-        ],
-      ),
-      body: Consumer<StoryListProvider>(
-        builder: (context, provider, _) {
-          if (provider.state == ResultState.loading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (provider.state == ResultState.hasData) {
-            return ListStoryWidget(storyList: provider.storyList.listStory);
-          } else if (provider.state == ResultState.error) {
-            return Center(child: Text(provider.message));
-          } else {
-            return const Center(child: Text(''));
-          }
-        },
-      ),
-      floatingActionButton: SizedBox(
-        width: 75,
-        height: 75,
-        child: FittedBox(
-          child: FloatingActionButton(
-            onPressed: () {
-              context.goNamed('add_story');
-            },
-            backgroundColor: const Color(0xFF37465D),
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
+          backgroundColor: const Color(0xFF37465D),
+          foregroundColor: Colors.white,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout, color: Color(0xFFef4444)),
+              onPressed: () {
+                context.read<AuthProvider>().logout();
+              },
+            ),
+          ],
+        ),
+        body: Consumer<StoryListProvider>(
+          builder: (context, provider, _) {
+            if (provider.state == ResultState.loading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (provider.state == ResultState.hasData) {
+              return ListStoryWidget(storyList: provider.storyList.listStory);
+            } else if (provider.state == ResultState.error) {
+              return Center(child: Text(provider.message));
+            } else {
+              return const Center(child: Text(''));
+            }
+          },
+        ),
+        floatingActionButton: SizedBox(
+          width: 75,
+          height: 75,
+          child: FittedBox(
+            child: FloatingActionButton(
+              onPressed: () {
+                context.goNamed('add_story');
+              },
+              backgroundColor: const Color(0xFF37465D),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
             ),
           ),
         ),

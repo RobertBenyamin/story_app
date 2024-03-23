@@ -36,72 +36,77 @@ class _AddStoryPageState extends State<AddStoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'New Story',
-          style: TextStyle(fontWeight: FontWeight.bold),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'New Story',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: const Color(0xFF37465D),
+          foregroundColor: Colors.white,
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              context.watch<UploadProvider>().imagePath == null
-                  ? const Align(
-                      alignment: Alignment.center,
-                      child: Icon(
-                        Icons.image,
-                        size: 300,
-                      ),
-                    )
-                  : _showImage(),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: CustomButton(
-                        hintText: 'Gallery', function: () => _onGalleryView()),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: CustomButton(
-                        hintText: 'Camera', function: () => _onCameraView()),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: _descriptionController,
-                maxLines: null,
-                style: const TextStyle(
-                  color: Colors.black,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                context.watch<UploadProvider>().imagePath == null
+                    ? const Align(
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.image,
+                          size: 300,
+                        ),
+                      )
+                    : _showImage(),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: CustomButton(
+                          hintText: 'Gallery',
+                          function: () => _onGalleryView()),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: CustomButton(
+                          hintText: 'Camera', function: () => _onCameraView()),
+                    ),
+                  ],
                 ),
-                decoration: InputDecoration(
-                  hintText: 'Description',
-                  hintStyle: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _descriptionController,
+                  maxLines: null,
+                  style: const TextStyle(
+                    color: Colors.black,
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xFF94c8ff),
-                      width: 2,
+                  decoration: InputDecoration(
+                    hintText: 'Description',
+                    hintStyle: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(0),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xFF94c8ff),
+                        width: 2,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              CustomButton(
-                  hintText: 'Upload',
-                  function: () =>
-                      _onUpload(context.read<AuthProvider>().token)),
-            ],
+                const SizedBox(height: 16),
+                CustomButton(
+                    hintText: 'Upload',
+                    function: () =>
+                        _onUpload(context.read<AuthProvider>().token)),
+              ],
+            ),
           ),
         ),
       ),

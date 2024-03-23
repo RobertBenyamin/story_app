@@ -27,25 +27,29 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Detail',
-          style: TextStyle(fontWeight: FontWeight.bold),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Detail',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: const Color(0xFF37465D),
+          foregroundColor: Colors.white,
         ),
-      ),
-      body: Consumer<StoryDetailProvider>(
-        builder: (context, provider, _) {
-          if (provider.state == ResultState.loading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (provider.state == ResultState.hasData) {
-            return StoryDetailWidget(story: provider.storyDetail.story);
-          } else if (provider.state == ResultState.error) {
-            return Center(child: Text(provider.message));
-          } else {
-            return const Center(child: Text(''));
-          }
-        },
+        body: Consumer<StoryDetailProvider>(
+          builder: (context, provider, _) {
+            if (provider.state == ResultState.loading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (provider.state == ResultState.hasData) {
+              return StoryDetailWidget(story: provider.storyDetail.story);
+            } else if (provider.state == ResultState.error) {
+              return Center(child: Text(provider.message));
+            } else {
+              return const Center(child: Text(''));
+            }
+          },
+        ),
       ),
     );
   }

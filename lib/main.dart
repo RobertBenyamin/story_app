@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:story_app/data/api/api_services.dart';
 
-import 'provider/upload_provider.dart';
 import 'routes/app_router.dart';
 import 'provider/list_provider.dart';
 import 'data/db/auth_repository.dart';
 import 'provider/detail_provider.dart';
+import 'provider/upload_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
+            fontFamily: GoogleFonts.quicksand().fontFamily,
           ),
           routerConfig: AppRouter.router,
         ));

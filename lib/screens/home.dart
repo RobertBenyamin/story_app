@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:story_app/provider/auth_provider.dart';
 import 'package:story_app/provider/list_provider.dart';
 
-import '../data/model/story_list.dart';
+import '../data/model/story.dart';
 import '../utils/result_state.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 class ListStoryWidget extends StatelessWidget {
-  final List<ListStory> storyList;
+  final List<Story> storyList;
   const ListStoryWidget({
     super.key,
     required this.storyList,

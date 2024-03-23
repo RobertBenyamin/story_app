@@ -39,7 +39,10 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: const Text(
+          'Register',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.all(16.0),

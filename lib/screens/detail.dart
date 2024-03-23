@@ -29,7 +29,10 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detail'),
+        title: const Text(
+          'Detail',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: Consumer<StoryDetailProvider>(
         builder: (context, provider, _) {

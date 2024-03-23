@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:story_app/widgets/custom_button.dart';
 
 import '../utils/result_state.dart';
 import '../provider/auth_provider.dart';
@@ -33,6 +34,14 @@ class _RegisterPageState extends State<RegisterPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  _register() {
+    context.read<AuthProvider>().register(
+          _nameController.text,
+          _emailController.text,
+          _passwordController.text,
+        );
   }
 
   @override
@@ -82,18 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
               },
             ),
             const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                context.read<AuthProvider>().register(
-                      _nameController.text,
-                      _emailController.text,
-                      _passwordController.text,
-                    );
-              },
-              child: context.watch<AuthProvider>().state == ResultState.loading
-                  ? const Text('Loading...')
-                  : const Text('Register'),
-            ),
+            CustomButton(hintText: 'Register', function: _register),
             const SizedBox(height: 12.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

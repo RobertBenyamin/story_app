@@ -1,11 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:story_app/widgets/custom_button.dart';
 
 import '../provider/auth_provider.dart';
 import '../provider/list_provider.dart';
@@ -60,13 +61,14 @@ class _AddStoryPageState extends State<AddStoryPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
-                    onPressed: () => _onGalleryView(),
-                    child: const Text('Gallery'),
+                  Expanded(
+                    child: CustomButton(
+                        hintText: 'Gallery', function: () => _onGalleryView()),
                   ),
-                  ElevatedButton(
-                    onPressed: () => _onCameraView(),
-                    child: const Text('Camera'),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: CustomButton(
+                        hintText: 'Camera', function: () => _onCameraView()),
                   ),
                 ],
               ),
@@ -79,18 +81,26 @@ class _AddStoryPageState extends State<AddStoryPage> {
                 ),
                 decoration: InputDecoration(
                   hintText: 'Description',
+                  hintStyle: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(0),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xFF94c8ff),
+                      width: 2,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () => _onUpload(context.read<AuthProvider>().token),
-                child: context.watch<UploadProvider>().isUploading
-                    ? const Text('Loading...')
-                    : const Text('Upload'),
-              )
+              CustomButton(
+                  hintText: 'Upload',
+                  function: () =>
+                      _onUpload(context.read<AuthProvider>().token)),
             ],
           ),
         ),

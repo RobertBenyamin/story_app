@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:story_app/provider/auth_provider.dart';
 
 import '../utils/result_state.dart';
 import '../widgets/auth_textfield.dart';
+import '../widgets/custom_button.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -30,6 +32,13 @@ class _LoginPageState extends State<LoginPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  _login() {
+    context.read<AuthProvider>().login(
+          _emailController.text,
+          _passwordController.text,
+        );
   }
 
   @override
@@ -69,16 +78,7 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                context
-                    .read<AuthProvider>()
-                    .login(_emailController.text, _passwordController.text);
-              },
-              child: context.watch<AuthProvider>().state == ResultState.loading
-                  ? const Text('Loading...')
-                  : const Text('Login'),
-            ),
+            CustomButton(hintText: 'Login', function: _login),
             const SizedBox(height: 12.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

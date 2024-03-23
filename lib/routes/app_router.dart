@@ -1,12 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:story_app/provider/auth_provider.dart';
 
+import '../data/api/api_services.dart';
+import '../data/db/auth_repository.dart';
 import '../screens/auth.dart';
 import '../screens/home.dart';
 
 class AppRouter {
+  static final loginInfo = AuthProvider(
+    authRepository: AuthRepository(),
+    apiService: ApiServices(),
+  );
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -24,12 +28,13 @@ class AppRouter {
         },
       ),
     ],
-    redirect: (BuildContext context, GoRouterState state) {
-      if (context.watch<AuthProvider>().isLoggedIn) {
-        return '/';
+    redirect: (context, state) {
+      if (loginInfo.isLoggedIn) {
+        return null;
       } else {
         return '/login';
       }
     },
+    refreshListenable: loginInfo,
   );
 }

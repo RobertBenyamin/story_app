@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:story_app/data/api/api_services.dart';
-import 'package:story_app/provider/auth_provider.dart';
 
-import 'data/db/auth_repository.dart';
-import 'provider/list_provider.dart';
 import 'routes/app_router.dart';
+import 'provider/list_provider.dart';
+import 'data/db/auth_repository.dart';
+import 'provider/detail_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,15 +20,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-            create: (context) => AuthProvider(
-              authRepository: AuthRepository(),
-              apiService: ApiServices(),
-            ),
+          ChangeNotifierProvider.value(
+            value: AppRouter.loginInfo,
           ),
           ChangeNotifierProvider(
               create: (context) =>
                   StoryListProvider(apiService: ApiServices())),
+          ChangeNotifierProvider(
+              create: (context) =>
+                  StoryDetailProvider(apiService: ApiServices())),
         ],
         child: MaterialApp.router(
           title: 'Story App',

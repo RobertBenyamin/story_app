@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
+import '../common.dart';
 import '../data/model/story.dart';
 import '../utils/result_state.dart';
 import '../widgets/card_story.dart';
@@ -30,9 +31,9 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Story',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          title: Text(
+            AppLocalizations.of(context)!.homeAppBar,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           backgroundColor: const Color(0xFF37465D),
           foregroundColor: Colors.white,
@@ -95,7 +96,8 @@ class ListStoryWidget extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Welcome, ${context.read<AuthProvider>().userName}',
+              AppLocalizations.of(context)!
+                  .homeWelcome(context.read<AuthProvider>().userName),
               style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),

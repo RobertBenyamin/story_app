@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:story_app/widgets/custom_button.dart';
 
+import '../common.dart';
 import '../provider/auth_provider.dart';
 import '../provider/list_provider.dart';
 import '../provider/upload_provider.dart';
@@ -39,9 +40,9 @@ class _AddStoryPageState extends State<AddStoryPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'New Story',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          title: Text(
+            AppLocalizations.of(context)!.createAppBar,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           backgroundColor: const Color(0xFF37465D),
           foregroundColor: Colors.white,
@@ -66,13 +67,14 @@ class _AddStoryPageState extends State<AddStoryPage> {
                   children: [
                     Expanded(
                       child: CustomButton(
-                          hintText: 'Gallery',
+                          hintText: AppLocalizations.of(context)!.gallery,
                           function: () => _onGalleryView()),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
                       child: CustomButton(
-                          hintText: 'Camera', function: () => _onCameraView()),
+                          hintText: AppLocalizations.of(context)!.camera,
+                          function: () => _onCameraView()),
                     ),
                   ],
                 ),
@@ -84,7 +86,7 @@ class _AddStoryPageState extends State<AddStoryPage> {
                     color: Colors.black,
                   ),
                   decoration: InputDecoration(
-                    hintText: 'Description',
+                    hintText: AppLocalizations.of(context)!.description,
                     hintStyle: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -102,7 +104,7 @@ class _AddStoryPageState extends State<AddStoryPage> {
                 ),
                 const SizedBox(height: 16),
                 CustomButton(
-                    hintText: 'Upload',
+                    hintText: AppLocalizations.of(context)!.upload,
                     function: () =>
                         _onUpload(context.read<AuthProvider>().token)),
               ],

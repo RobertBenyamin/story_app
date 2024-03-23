@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:story_app/widgets/custom_button.dart';
 
+import '../common.dart';
 import '../utils/result_state.dart';
 import '../provider/auth_provider.dart';
 import '../widgets/auth_textfield.dart';
@@ -52,9 +53,9 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Story App',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.appName,
+              style: const TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.bold,
               ),
@@ -63,17 +64,17 @@ class _RegisterPageState extends State<RegisterPage> {
             AuthTextField(
                 textController: _nameController,
                 obscureText: null,
-                hintText: 'Name'),
+                hintText: AppLocalizations.of(context)!.name),
             const SizedBox(height: 16.0),
             AuthTextField(
                 textController: _emailController,
                 obscureText: null,
-                hintText: 'Email'),
+                hintText: AppLocalizations.of(context)!.email),
             const SizedBox(height: 16.0),
             AuthTextField(
                 textController: _passwordController,
                 obscureText: true,
-                hintText: 'Password'),
+                hintText: AppLocalizations.of(context)!.password),
             const SizedBox(height: 16.0),
             Consumer<AuthProvider>(
               builder: (context, state, _) {
@@ -93,17 +94,19 @@ class _RegisterPageState extends State<RegisterPage> {
               },
             ),
             const SizedBox(height: 16.0),
-            CustomButton(hintText: 'Register', function: _register),
+            CustomButton(
+                hintText: AppLocalizations.of(context)!.register,
+                function: _register),
             const SizedBox(height: 12.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Already have an account? "),
+                Text(AppLocalizations.of(context)!.loginTextButton1),
                 GestureDetector(
                   onTap: widget.showLoginPage,
-                  child: const Text(
-                    "Login Now",
-                    style: TextStyle(
+                  child: Text(
+                    AppLocalizations.of(context)!.loginTextButton2,
+                    style: const TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold),
                   ),
                 ),

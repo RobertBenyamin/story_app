@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:story_app/provider/auth_provider.dart';
 
+import '../common.dart';
 import '../utils/result_state.dart';
-import '../widgets/auth_textfield.dart';
 import '../widgets/custom_button.dart';
+import '../widgets/auth_textfield.dart';
+import '../provider/auth_provider.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -49,9 +49,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Story App',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.appName,
+              style: const TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.bold,
               ),
@@ -60,12 +60,12 @@ class _LoginPageState extends State<LoginPage> {
             AuthTextField(
                 textController: _emailController,
                 obscureText: null,
-                hintText: 'Email'),
+                hintText: AppLocalizations.of(context)!.email),
             const SizedBox(height: 16.0),
             AuthTextField(
                 textController: _passwordController,
                 obscureText: true,
-                hintText: 'Password'),
+                hintText: AppLocalizations.of(context)!.password),
             const SizedBox(height: 16.0),
             Consumer<AuthProvider>(
               builder: (context, state, _) {
@@ -80,17 +80,19 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             const SizedBox(height: 16.0),
-            CustomButton(hintText: 'Login', function: _login),
+            CustomButton(
+                hintText: AppLocalizations.of(context)!.login,
+                function: _login),
             const SizedBox(height: 12.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Don't have an account yet? "),
+                Text(AppLocalizations.of(context)!.registerTextButton1),
                 GestureDetector(
                   onTap: widget.showRegisterPage,
-                  child: const Text(
-                    "Register Now",
-                    style: TextStyle(
+                  child: Text(
+                    AppLocalizations.of(context)!.registerTextButton2,
+                    style: const TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold),
                   ),
                 ),

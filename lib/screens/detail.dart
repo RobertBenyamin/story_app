@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get_time_ago/get_time_ago.dart';
 
+import '../common.dart';
 import '../data/model/story.dart';
+import '../utils/result_state.dart';
 import '../provider/auth_provider.dart';
 import '../provider/detail_provider.dart';
-import '../utils/result_state.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key, required this.id});
@@ -30,9 +31,9 @@ class _DetailPageState extends State<DetailPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Detail',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          title: Text(
+            AppLocalizations.of(context)!.detailAppBar,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           backgroundColor: const Color(0xFF37465D),
           foregroundColor: Colors.white,

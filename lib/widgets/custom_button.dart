@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:story_app/provider/auth_provider.dart';
-import 'package:story_app/utils/result_state.dart';
+
+import '../common.dart';
+import '../utils/result_state.dart';
+import '../provider/auth_provider.dart';
 
 class CustomButton extends StatelessWidget {
   final String hintText;
@@ -25,7 +27,7 @@ class CustomButton extends StatelessWidget {
         child: Center(
           child: Text(
             context.watch<AuthProvider>().state == ResultState.loading
-                ? 'Loading...'
+                ? AppLocalizations.of(context)!.loading
                 : hintText,
             style: const TextStyle(
               color: Colors.white,

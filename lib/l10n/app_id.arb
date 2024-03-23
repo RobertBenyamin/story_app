@@ -1,0 +1,29 @@
+{
+    "@@locale": "id",
+    "appName": "Story App",
+    "name": "Nama",
+    "email": "Email",
+    "password": "Kata sandi",
+    "login": "Login",
+    "loginTextButton1": "Sudah punya akun? ",
+    "loginTextButton2": "Login Sekarang",
+    "register": "Daftar",
+    "registerTextButton1": "Belum memiliki akun? ",
+    "registerTextButton2": "Daftar Sekarang",
+    "loading": "Memuat...",
+    "homeAppBar": "Story",
+    "homeWelcome": "Selamat Datang, {myName}",
+    "@homeWelcome": {
+        "placeholders": {
+            "myName": {
+                "type": "String"
+            }
+        }
+    },
+    "detailAppBar": "Detail",
+    "createAppBar": "Buat Story",
+    "gallery": "Galeri",
+    "camera": "Kamera",
+    "description": "Deskripsi",
+    "upload": "Unggah"
+}

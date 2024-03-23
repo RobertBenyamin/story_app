@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:story_app/data/api/api_services.dart';
 
+import 'common.dart';
 import 'routes/app_router.dart';
+import 'data/api/api_services.dart';
 import 'provider/list_provider.dart';
 import 'data/db/auth_repository.dart';
 import 'provider/detail_provider.dart';
 import 'provider/upload_provider.dart';
+import 'provider/localization_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,18 +34,24 @@ class MyApp extends StatelessWidget {
               create: (context) =>
                   StoryDetailProvider(apiService: ApiServices())),
           ChangeNotifierProvider(
-              create: (context) =>
-                  UploadProvider(apiService: ApiServices())),
+              create: (context) => UploadProvider(apiService: ApiServices())),
+          ChangeNotifierProvider(create: (context) => LocalizationProvider())
         ],
-        child: MaterialApp.router(
-          title: 'Story App',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-            fontFamily: GoogleFonts.quicksand().fontFamily,
-          ),
-          routerConfig: AppRouter.router,
-        ));
+        builder: (context, child) {
+          final provider = Provider.of<LocalizationProvider>(context);
+          return MaterialApp.router(
+            title: 'Story App',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+              fontFamily: GoogleFonts.quicksand().fontFamily,
+            ),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: provider.locale,
+            routerConfig: AppRouter.router,
+          );
+        });
   }
 }

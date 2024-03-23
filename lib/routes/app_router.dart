@@ -29,11 +29,16 @@ class AppRouter {
       ),
     ],
     redirect: (context, state) {
-      if (loginInfo.isLoggedIn) {
-        return null;
-      } else {
-        return '/login';
-      }
+      bool loggedIn = loginInfo.isLoggedIn;
+      bool loggingIn = state.fullPath == '/login';
+      if (!loggedIn) return loggingIn ? null : '/login';
+
+      // if the user is logged in but still on the login page, send them to
+      // the home page
+      if (loggingIn) return '/';
+
+      // no need to redirect at all
+      return null;
     },
     refreshListenable: loginInfo,
   );

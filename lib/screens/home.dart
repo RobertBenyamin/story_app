@@ -92,10 +92,9 @@ class ListStoryWidget extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            const SizedBox(height: 16),
             Text(
               'Welcome, ${context.read<AuthProvider>().userName}',
-              style: const TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             ListView.builder(

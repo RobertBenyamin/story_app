@@ -1,10 +1,11 @@
 import 'package:go_router/go_router.dart';
 import 'package:story_app/provider/auth_provider.dart';
 
-import '../data/api/api_services.dart';
-import '../data/db/auth_repository.dart';
 import '../screens/auth.dart';
 import '../screens/home.dart';
+import '../screens/detail.dart';
+import '../data/api/api_services.dart';
+import '../data/db/auth_repository.dart';
 
 class AppRouter {
   static final loginInfo = AuthProvider(
@@ -19,6 +20,16 @@ class AppRouter {
         builder: (context, state) {
           return const HomePage();
         },
+        routes: [
+          GoRoute(
+            path: 'stories/:id',
+            name: 'detail',
+            builder: (context, state) {
+              final id = state.pathParameters['id'];
+              return DetailPage(id: id!);
+            },
+          ),
+        ],
       ),
       GoRoute(
         path: '/login',

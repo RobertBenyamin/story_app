@@ -54,11 +54,21 @@ class _HomePageState extends State<HomePage> {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.goNamed('add_story');
-        },
-        child: const Icon(Icons.add),
+      floatingActionButton: SizedBox(
+        width: 75,
+        height: 75,
+        child: FittedBox(
+          child: FloatingActionButton(
+            onPressed: () {
+              context.goNamed('add_story');
+            },
+            backgroundColor: const Color(0xFF37465D),
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }

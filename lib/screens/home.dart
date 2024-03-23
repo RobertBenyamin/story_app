@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
-import 'package:story_app/provider/auth_provider.dart';
-import 'package:story_app/provider/list_provider.dart';
 
 import '../data/model/story.dart';
 import '../utils/result_state.dart';
 import '../widgets/card_story.dart';
+import '../provider/auth_provider.dart';
+import '../provider/list_provider.dart';
+import '../widgets/flag_icon_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: const Color(0xFF37465D),
           foregroundColor: Colors.white,
           actions: [
+            const FlagIconWidget(),
             IconButton(
               icon: const Icon(Icons.logout, color: Color(0xFFef4444)),
               onPressed: () {

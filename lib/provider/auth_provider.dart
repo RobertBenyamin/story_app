@@ -27,6 +27,12 @@ class AuthProvider with ChangeNotifier {
     fetchLoginStatus();
   }
 
+  void resetState() {
+    _state = ResultState.noData;
+    _message = '';
+    notifyListeners();
+  }
+
   Future<void> fetchLoginStatus() async {
     _isLoggedIn = await authRepository.isLoggedin();
     _userName = await authRepository.getUserName() ?? '';

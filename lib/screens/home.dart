@@ -81,7 +81,12 @@ class ListStoryWidget extends StatelessWidget {
               itemCount: storyList.length,
               itemBuilder: (context, index) {
                 final story = storyList[index];
-                return CardStory(story: story);
+                return InkWell(
+                  child: CardStory(story: story),
+                  onTap: () {
+                    context.go('/stories/${story.id}');
+                  },
+                );
               },
             ),
           ],

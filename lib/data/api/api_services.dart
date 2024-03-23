@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../model/user.dart';
 import '../model/response.dart';
 import '../model/story_list.dart';
-import '../model/user.dart';
+import '../model/story_detail.dart';
 
 class ApiServices {
   static const String baseUrl = 'https://story-api.dicoding.dev/v1/';
@@ -46,6 +47,20 @@ class ApiServices {
     );
     if (response.statusCode == 200) {
       return StoryList.fromJson(jsonDecode(response.body));
+    } else {
+      return Response.fromJson(jsonDecode(response.body));
+    }
+  }
+
+  Future<dynamic> getStoryDetail(http.Client client, String token, String id) async {
+    final response = await client.get(
+      Uri.parse('${baseUrl}stories/$id'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      return StoryDetail.fromJson(jsonDecode(response.body));
     } else {
       return Response.fromJson(jsonDecode(response.body));
     }

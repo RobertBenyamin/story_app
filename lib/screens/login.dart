@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:story_app/provider/auth_provider.dart';
 
 import '../utils/result_state.dart';
+import '../widgets/auth_textfield.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -42,20 +43,15 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-              ),
-            ),
+            AuthTextField(
+                textController: _emailController,
+                obscureText: null,
+                hintText: 'Email'),
             const SizedBox(height: 16.0),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-              ),
-              obscureText: true,
-            ),
+            AuthTextField(
+                textController: _passwordController,
+                obscureText: true,
+                hintText: 'Password'),
             const SizedBox(height: 16.0),
             Consumer<AuthProvider>(
               builder: (context, state, _) {

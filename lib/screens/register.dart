@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/auth_provider.dart';
 import '../utils/result_state.dart';
+import '../provider/auth_provider.dart';
+import '../widgets/auth_textfield.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -45,27 +46,20 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Name',
-              ),
-            ),
+            AuthTextField(
+                textController: _nameController,
+                obscureText: null,
+                hintText: 'Name'),
             const SizedBox(height: 16.0),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-              ),
-            ),
+            AuthTextField(
+                textController: _emailController,
+                obscureText: null,
+                hintText: 'Email'),
             const SizedBox(height: 16.0),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-              ),
-              obscureText: true,
-            ),
+            AuthTextField(
+                textController: _passwordController,
+                obscureText: true,
+                hintText: 'Password'),
             const SizedBox(height: 16.0),
             Consumer<AuthProvider>(
               builder: (context, state, _) {

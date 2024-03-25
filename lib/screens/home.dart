@@ -21,9 +21,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    context
-        .read<StoryListProvider>()
-        .fetchStoryList(context.read<AuthProvider>().token);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<StoryListProvider>()
+          .fetchStoryList(context.read<AuthProvider>().token);
+    });
   }
 
   @override

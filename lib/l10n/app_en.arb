@@ -1,0 +1,22 @@
+{
+    "@@locale": "en",
+    "appName": "Story App",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "loginTextButton1": "Already have an account? ",
+    "loginTextButton2": "Login Now",
+    "register": "Register",
+    "registerTextButton1": "Don't have an account? ",
+    "registerTextButton2": "Register Now",
+    "loading": "Loading...",
+    "homeAppBar": "Story",
+    "homeWelcome": "Welcome, {myName}",
+    "detailAppBar": "Detail",
+    "createAppBar": "New Story",
+    "gallery": "Gallery",
+    "camera": "Camera",
+    "description": "Description",
+    "upload": "Upload"
+}

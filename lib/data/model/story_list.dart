@@ -20,8 +20,8 @@ class StoryList {
   factory StoryList.fromJson(Map<String, dynamic> json) => StoryList(
         error: json["error"],
         message: json["message"],
-        listStory: List<Story>.from(
-            json["listStory"].map((x) => Story.fromJson(x))),
+        listStory:
+            List<Story>.from(json["listStory"].map((x) => Story.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

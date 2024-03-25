@@ -1,23 +1,23 @@
 class Story {
-    String id;
-    String name;
-    String description;
-    String photoUrl;
-    DateTime createdAt;
-    double? lat;
-    double? lon;
+  String id;
+  String name;
+  String description;
+  String photoUrl;
+  DateTime createdAt;
+  double? lat;
+  double? lon;
 
-    Story({
-        required this.id,
-        required this.name,
-        required this.description,
-        required this.photoUrl,
-        required this.createdAt,
-        this.lat,
-        this.lon,
-    });
+  Story({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.photoUrl,
+    required this.createdAt,
+    this.lat,
+    this.lon,
+  });
 
-    factory Story.fromJson(Map<String, dynamic> json) => Story(
+  factory Story.fromJson(Map<String, dynamic> json) => Story(
         id: json["id"],
         name: json["name"],
         description: json["description"],
@@ -25,9 +25,9 @@ class Story {
         createdAt: DateTime.parse(json["createdAt"]),
         lat: json["lat"]?.toDouble(),
         lon: json["lon"]?.toDouble(),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "description": description,
@@ -35,5 +35,5 @@ class Story {
         "createdAt": createdAt.toIso8601String(),
         "lat": lat,
         "lon": lon,
-    };
+      };
 }

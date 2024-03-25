@@ -2,9 +2,10 @@ import 'package:go_router/go_router.dart';
 import 'package:story_app/screens/add_story.dart';
 import 'package:story_app/provider/auth_provider.dart';
 
-import '../screens/auth.dart';
 import '../screens/home.dart';
+import '../screens/login.dart';
 import '../screens/detail.dart';
+import '../screens/register.dart';
 import '../data/api/api_services.dart';
 import '../data/db/auth_repository.dart';
 
@@ -43,20 +44,33 @@ class AppRouter {
         path: '/login',
         name: 'login',
         builder: (context, state) {
-          return const AuthPage();
+          return const LoginPage();
         },
       ),
+      GoRoute(
+          path: '/register',
+          name: 'register',
+          builder: (context, state) {
+            return const RegisterPage();
+          }),
     ],
     redirect: (context, state) {
       bool loggedIn = loginInfo.isLoggedIn;
-      bool loggingIn = state.fullPath == '/login';
-      if (!loggedIn) return loggingIn ? null : '/login';
+      String currentPath = state.fullPath!;
 
-      // if the user is logged in but still on the login page, send them to
-      // the home page
-      if (loggingIn) return '/';
+      // Jika pengguna belum masuk, dan mencoba mengakses halaman selain /login atau /register,
+      // arahkan mereka ke /login.
+      if (!loggedIn && currentPath != '/login' && currentPath != '/register') {
+        return '/login';
+      }
 
-      // no need to redirect at all
+      // Jika pengguna telah masuk, tetapi mencoba mengakses halaman /login atau /register,
+      // arahkan mereka kembali ke halaman beranda.
+      if (loggedIn && (currentPath == '/login' || currentPath == '/register')) {
+        return '/';
+      }
+
+      // Tidak perlu redirect
       return null;
     },
     refreshListenable: loginInfo,

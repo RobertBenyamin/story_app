@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:story_app/widgets/custom_button.dart';
 
 import '../common.dart';
@@ -8,9 +9,7 @@ import '../provider/auth_provider.dart';
 import '../widgets/auth_textfield.dart';
 
 class RegisterPage extends StatefulWidget {
-  final VoidCallback showLoginPage;
-
-  const RegisterPage({super.key, required this.showLoginPage});
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -103,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 Text(AppLocalizations.of(context)!.loginTextButton1),
                 GestureDetector(
-                  onTap: widget.showLoginPage,
+                  onTap: () => context.go('/login'),
                   child: Text(
                     AppLocalizations.of(context)!.loginTextButton2,
                     style: const TextStyle(
